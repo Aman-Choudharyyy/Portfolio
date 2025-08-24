@@ -1,6 +1,23 @@
 "use client"
-
 import { Button } from "@/components/ui/button"
+import Head from "next/head";
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Aman Choudhary | Portfolio</title>
+        <meta name="description" content="Defensive Security Specialist Portfolio" />
+      </Head>
+      
+      {/* Your page content */}
+      <main>
+        ...
+      </main>
+    </>
+  );
+}
+
 import {
   Sun,
   Moon,
