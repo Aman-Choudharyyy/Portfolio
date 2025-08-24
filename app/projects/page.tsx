@@ -3,6 +3,23 @@
 import { Button } from "@/components/ui/button"
 import { X, Shield, Eye, AlertTriangle, Network, ExternalLink, Github } from "lucide-react"
 import { useState, useEffect } from "react"
+import Head from "next/head";
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Aman Choudhary | Portfolio</title>
+        <meta name="description" content="Defensive Security Specialist Portfolio" />
+      </Head>
+      
+      {/* Your page content */}
+      <main>
+        ...
+      </main>
+    </>
+  );
+}
 
 export default function ProjectsPage() {
   const [isDark, setIsDark] = useState(true)
