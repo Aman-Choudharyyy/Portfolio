@@ -22,6 +22,7 @@ import {
   Phone,
   MapPin,
   ExternalLink,
+  Home,
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -43,7 +44,6 @@ const ThreeVerticalLines = ({ className }: { className?: string }) => (
 
 export default function Page() {
   const [isDark, setIsDark] = useState(true)
-  const [isNavOpen, setIsNavOpen] = useState(false)
   const [activeModal, setActiveModal] = useState<string | null>(null)
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function Page() {
   }
 
   const downloadResume = () => {
-    const googleDriveUrl = "https://drive.google.com/uc?export=download&id=13dhJrn6dB1iKB1FIFzfw6ejjM7ge5e-y"
+    const googleDriveUrl = "https://drive.google.com/file/d/14U6loqq_I9P6DevYjrXDUduj0wkMzLcd/view?usp=sharing"
 
     const link = document.createElement("a")
     link.href = googleDriveUrl
@@ -73,7 +73,7 @@ export default function Page() {
 
   const navigationItems = [
     {
-      icon: User,
+      icon: Home, // Changed icon to Home
       title: "Home",
       description: "Back to main page",
       href: "home",
@@ -110,7 +110,7 @@ export default function Page() {
     } else {
       setActiveModal(href)
     }
-    setIsNavOpen(false)
+    // No longer need to close nav as it's removed
   }
 
   const closeModal = () => {
@@ -118,239 +118,163 @@ export default function Page() {
   }
 
   return (
-    <div
-      className={`min-h-screen relative transition-all duration-500 ${
-        isDark ? "bg-[#1F1B24] text-[#EDE6F4]" : "bg-[#FFF5F5] text-[#4B3F40]"
-      }`}
-    >
-      {/* Top navigation */}
-      <div className="fixed top-6 left-6 z-40">
+    <div className={`min-h-screen transition-colors duration-500 ${isDark ? "bg-[#1F1B24]" : "bg-[#FFF5F5]"}`}>
+      {/* Theme toggle */}
+      <div className="fixed top-6 right-6 z-40">
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => setIsNavOpen(!isNavOpen)}
-          className={`transition-all duration-300 rounded-xl border-2 px-4 py-2 min-w-[44px] min-h-[44px] ${
-            isDark
-              ? "bg-transparent text-[#B18BD8] border-[#B18BD8] hover:bg-[#A66CFF] hover:text-white hover:border-[#A66CFF]"
-              : "bg-[#BC8C7A] text-[#FFF5F5] border-[#BC8C7A]"
-          }`}
-          aria-label="Navigation Menu"
-        >
-          <ThreeVerticalLines className="h-5 w-5" />
-        </Button>
-      </div>
-
-      {/* Navigation Panel */}
-      {isNavOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsNavOpen(false)} />
-          <div
-            className={`relative w-80 h-full transition-all duration-300 ${
-              isDark ? "bg-[#1F1B24] border-r border-[#2B2735]" : "bg-[#FFF5F5] border-r border-[#F0E6E6]"
-            }`}
-          >
-            <div className="flex items-center justify-between p-6 border-b border-opacity-20">
-              <h2 className={`text-xl font-semibold ${isDark ? "text-[#EDE6F4]" : "text-[#4B3F40]"}`}>Navigation</h2>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsNavOpen(false)}
-                className={`transition-all duration-300 hover:scale-110 ${
-                  isDark
-                    ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735]"
-                    : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8]"
-                }`}
-              >
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-            <div className="p-4 space-y-2">
-              {navigationItems.map((item, index) => {
-                const IconComponent = item.icon
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleNavigation(item.href)}
-                    className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 hover:scale-[1.02] ${
-                      isDark ? "hover:bg-[#2B2735] text-[#EDE6F4]" : "hover:bg-[#FFF8F8] text-[#4B3F40]"
-                    }`}
-                  >
-                    <div
-                      className={`p-2 rounded-lg ${
-                        isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
-                      }`}
-                    >
-                      <IconComponent className="h-5 w-5" />
-                    </div>
-                    <div className="text-left">
-                      <div className="font-medium">{item.title}</div>
-                      <div className={`text-sm ${isDark ? "text-[#A29BB0]" : "text-[#9E8C89]"}`}>
-                        {item.description}
-                      </div>
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-opacity-20">
-              <div className={`text-center text-sm ${isDark ? "text-[#A29BB0]" : "text-[#9E8C89]"}`}>
-                Aman Choudhary - Defensive Security Specialist
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="fixed top-6 right-6 z-40">
-        <Button
           onClick={toggleTheme}
-          className={`transition-all duration-300 rounded-xl border-2 px-4 py-2 hover:scale-105 active:scale-95 min-w-[44px] min-h-[44px] ${
-            isDark
-              ? "bg-transparent text-[#B18BD8] border-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24] hover:shadow-lg hover:shadow-[#B18BD8]/20"
-              : "bg-[#BC8C7A] text-[#FFF5F5] border-[#BC8C7A] hover:bg-transparent hover:text-[#BC8C7A] hover:border-[#BC8C7A]"
+          className={`transition-all duration-300 rounded-xl border-2 px-4 py-2 min-w-[44px] min-h-[44px] ${
+            isDark ? "bg-transparent text-[#B18BD8] border-[#B18BD8]" : "bg-transparent text-[#BC8C7A] border-[#BC8C7A]"
           }`}
-          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label="Toggle theme"
         >
           {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
       </div>
 
       {/* Hero Section */}
-      <section className="flex items-center justify-center min-h-screen px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-12 max-w-6xl w-full">
-          <div className="relative animate-in fade-in duration-700">
-            <div
-              className={`w-80 h-80 rounded-full p-1 transition-all duration-500 ${
-                isDark
-                  ? "bg-gradient-to-br from-[#B18BD8] via-[#A66CFF] to-[#B18BD8] shadow-2xl shadow-[#A66CFF]/20"
-                  : "bg-gradient-to-br from-[#DABFAF] via-[#BC8C7A] to-[#DABFAF] shadow-2xl shadow-[#BC8C7A]/20"
-              }`}
-            >
+      <div className="container mx-auto px-4 py-12 lg:py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+          {/* Profile Image */}
+          <div className="w-full lg:w-auto flex justify-center lg:justify-start">
+            <div className="relative group">
               <div
-                className={`w-full h-full rounded-full overflow-hidden transition-colors duration-500 ${
-                  isDark ? "bg-[#2B2735]" : "bg-[#FFF8F8]"
+                className={`absolute -inset-1 rounded-full blur-xl transition-all duration-500 ${
+                  isDark
+                    ? "bg-gradient-to-r from-[#B18BD8] via-[#A66CFF] to-[#B18BD8] opacity-75 group-hover:opacity-100"
+                    : "bg-gradient-to-r from-[#DABFAF] via-[#BC8C7A] to-[#DABFAF] opacity-75 group-hover:opacity-100"
                 }`}
-              >
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dp.jpg-xr3pY4wf0nEk5GgtYCT20Tjba1NLnJ.jpeg"
-                  alt="Aman Choudhary"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 text-center lg:text-left max-w-2xl animate-in slide-in-from-right duration-700">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-              Hi, I'm{" "}
-              <span
-                className={`bg-clip-text text-transparent transition-all duration-500 ${
+              />
+              <div
+                className={`relative rounded-full p-1.5 transition-all duration-500 ${
                   isDark
                     ? "bg-gradient-to-r from-[#B18BD8] via-[#A66CFF] to-[#B18BD8]"
                     : "bg-gradient-to-r from-[#DABFAF] via-[#BC8C7A] to-[#DABFAF]"
                 }`}
               >
-                Aman Choudhary
-              </span>
-            </h1>
+                <img
+                  src="/images/dp.jpeg"
+                  alt="Aman Choudhary"
+                  className="w-64 h-64 lg:w-80 lg:h-80 rounded-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
 
-            <h2
-              className={`text-xl lg:text-2xl mb-6 transition-colors duration-500 ${
-                isDark ? "text-white" : "text-[#4A4A4A]"
-              }`}
-            >
-              Defensive Security Specialist
-            </h2>
-
-            <p
-              className={`text-lg leading-relaxed mb-8 max-w-xl transition-colors duration-500 ${
-                isDark ? "text-white" : "text-[#4A4A4A]"
-              }`}
-            >
-              Final-year B.Tech Computer Science student passionate about cybersecurity, specializing in defensive
-              security strategies, threat detection, and incident response. Building secure digital environments for
-              tomorrow.
-            </p>
-
-            <div className="flex justify-center flex-col sm:flex-row gap-4 mb-8">
-              <Button
-                size="lg"
-                onClick={() => handleNavigation("projects")}
-                className={`transition-all duration-300 border-2 px-8 py-3 text-lg hover:scale-105 active:scale-95 min-h-[44px] ${
-                  isDark
-                    ? "bg-[#A66CFF] text-white border-[#A66CFF] hover:bg-transparent hover:text-[#A66CFF] hover:shadow-lg hover:shadow-[#A66CFF]/20"
-                    : "bg-[#BC8C7A] text-[#FFF5F5] border-[#BC8C7A] hover:bg-transparent hover:text-[#BC8C7A] hover:shadow-lg hover:shadow-[#BC8C7A]/20"
-                }`}
+          {/* Text Content */}
+          <div className="flex-1 text-center lg:text-left space-y-6">
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                <span className={isDark ? "text-white" : "text-black"}>Hi, I'm </span>
+                <span className={`${isDark ? "text-[#B18BD8]" : "text-[#BC8C7A]"}`}>Aman Choudhary</span>
+              </h1>
+              <p className={`text-xl md:text-2xl font-medium ${isDark ? "text-white" : "text-[#4A4A4A]"}`}>
+                Defensive Security Specialist
+              </p>
+              <p
+                className={`text-base md:text-lg max-w-2xl leading-relaxed ${isDark ? "text-white" : "text-[#4A4A4A]"}`}
               >
-                View My Work
-              </Button>
+                Final-year B.Tech Computer Science student passionate about cybersecurity, specializing in defensive
+                security strategies, threat detection, and incident response. Building secure digital environments for
+                tomorrow.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Button
                 variant="outline"
                 size="lg"
-                onClick={downloadResume}
-                className={`transition-all duration-300 border-2 px-8 py-3 text-lg hover:scale-105 active:scale-95 min-h-[44px] ${
+                onClick={() => handleNavigation("projects")}
+                className={`text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 min-w-[180px] min-h-[44px] ${
                   isDark
-                    ? "border-[#B18BD8] text-white bg-transparent hover:bg-[#A66CFF] hover:text-white hover:shadow-lg hover:shadow-[#B18BD8]/20"
-                    : "bg-transparent text-[#BC8C7A] shadow-lg shadow-[#BC8C7A]/20 hover:bg-[#BC8C7A] hover:text-[#FFF5F5] border-[#BC8C7A]"
+                    ? "border-2 border-[#B18BD8] hover:bg-[#B18BD8] hover:text-white shadow-lg shadow-[#B18BD8]/20 hover:shadow-xl hover:shadow-[#A66CFF]/50 text-[#B18BD8]"
+                    : "border-2 border-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white text-[#BC8C7A]"
+                }`}
+              
+                View My Work
+              </Button>
+              <Button
+                onClick={downloadResume}
+                variant="outline"
+                size="lg"
+                className={`text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 min-w-[180px] min-h-[44px] ${
+                  isDark
+                    ? "border-2 border-[#B18BD8] hover:bg-[#B18BD8] hover:text-white shadow-lg shadow-[#B18BD8]/20 hover:shadow-xl hover:shadow-[#A66CFF]/50 text-[#B18BD8]"
+                    : "border-2 border-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white text-[#BC8C7A]"
                 }`}
               >
                 Download Resume
               </Button>
             </div>
 
-            <div className="flex justify-center lg:justify-start gap-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`transition-all duration-300 border-2px hover:scale-110 active:scale-95 min-w-[44px] min-h-[44px] ${
-                  isDark
-                    ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735] hover:border-[#BC8C7A]hover:shadow-lg"
-                    : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8] hover:shadow-lg"
-                }`}
-                aria-label="GitHub Profile"
-              >
-                <Github className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`transition-all duration-300 hover:scale-110 active:scale-95 min-w-[44px] min-h-[44px] ${
-                  isDark
-                    ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735] hover:shadow-lg"
-                    : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8] hover:shadow-lg"
-                }`}
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`transition-all duration-300 hover:scale-110 active:scale-95 min-w-[44px] min-h-[44px] ${
-                  isDark
-                    ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735] hover:shadow-lg"
-                    : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8] hover:shadow-lg"
-                }`}
-                aria-label="Twitter Profile"
-              >
-                <Twitter className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`transition-all duration-300 hover:scale-110 active:scale-95 min-w-[44px] min-h-[44px] ${
-                  isDark
-                    ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735] hover:shadow-lg"
-                    : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8] hover:shadow-lg"
-                }`}
-                aria-label="Email Contact"
-              >
-                <Mail className="h-5 w-5" />
-              </Button>
+            {/* Social Links */}
+            <div className="flex gap-4 justify-center lg:justify-start pt-4">
+              {[
+                { icon: Github, href: "https://github.com/AmanChoudhary1", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/aman-choudhary-a7a42024a/", label: "LinkedIn" },
+                { icon: Twitter, href: "https://twitter.com/AmanChoudharySec", label: "Twitter" },
+                { icon: Mail, href: "mailto:aman.r.choudharyy@gmail.com", label: "Email" },
+              ].map((social, index) => {
+                const IconComponent = social.icon
+                return (
+                  <a
+                    key={index}
+                    href={social.href}
+                    aria-label={social.label}
+                    className={`p-3 rounded-full transition-all duration-300 hover:scale-110 min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                      isDark
+                        ? "bg-[#2B2735] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-white hover:shadow-lg hover:shadow-[#A66CFF]/30"
+                        : "bg-[#FFF8F8] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white hover:shadow-lg hover:shadow-[#BC8C7A]/30"
+                    }`}
+                  >
+                    <IconComponent className="h-5 w-5" />
+                  </a>
+                )
+              })}
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      <div className="fixed bottom-0 left-0 right-0 z-40 pb-safe">
+        <div
+          className={`mx-auto max-w-2xl px-4 pb-4 ${
+            isDark
+              ? "bg-gradient-to-t from-[#1F1B24] via-[#1F1B24] to-transparent"
+              : "bg-gradient-to-t from-[#FFF5F5] via-[#FFF5F5] to-transparent"
+          }`}
+        >
+          <div
+            className={`flex items-center justify-around gap-2 p-3 rounded-2xl backdrop-blur-lg border-2 shadow-2xl ${
+              isDark
+                ? "bg-[#2B2735]/90 border-[#3D3548] shadow-[#A66CFF]/20"
+                : "bg-[#FFF8F8]/90 border-[#F0E6E6] shadow-[#BC8C7A]/20"
+            }`}
+          >
+            {navigationItems.map((item, index) => {
+              const IconComponent = item.icon
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleNavigation(item.href)}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-300 hover:scale-110 min-w-[60px] group ${
+                    isDark
+                      ? "text-[#B18BD8] hover:bg-[#A66CFF]/20 hover:text-[#EDE6F4]"
+                      : "text-[#BC8C7A] hover:bg-[#BC8C7A]/20 hover:text-[#4B3F40]"
+                  }`}
+                  aria-label={item.title}
+                >
+                  <IconComponent className="h-6 w-6" />
+                  <span className="text-xs font-medium whitespace-nowrap">{item.title}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
 
       {/* About Me Modal */}
       {activeModal === "about" && (
@@ -509,6 +433,8 @@ export default function Page() {
                       "Advanced NIDS implementation using machine learning algorithms to detect and classify network threats in real-time.",
                     status: "Completed",
                     technologies: ["Python", "Scikit-learn", "Wireshark", "Snort"],
+                    codeHref: "#", // Placeholder
+                    demoHref: "#", // Placeholder
                   },
                   {
                     icon: Eye,
@@ -517,6 +443,8 @@ export default function Page() {
                       "Custom Security Information and Event Management dashboard for centralized log analysis and threat visualization.",
                     status: "In Progress",
                     technologies: ["ELK Stack", "Kibana", "Logstash", "Python"],
+                    codeHref: "#", // Placeholder
+                    demoHref: "#", // Placeholder
                   },
                   {
                     icon: Network,
@@ -525,6 +453,8 @@ export default function Page() {
                       "Automated vulnerability scanner that identifies security weaknesses in network infrastructure and web applications.",
                     status: "Completed",
                     technologies: ["Nmap", "OpenVAS", "Python", "Docker"],
+                    codeHref: "#", // Placeholder
+                    demoHref: "#", // Placeholder
                   },
                   {
                     icon: Zap,
@@ -533,6 +463,8 @@ export default function Page() {
                       "SOAR-based incident response automation platform that streamlines security incident handling and remediation.",
                     status: "Planning",
                     technologies: ["Phantom", "Python", "REST APIs", "Playbooks"],
+                    codeHref: "#", // Placeholder
+                    demoHref: "#", // Placeholder
                   },
                 ].map((project, index) => {
                   const IconComponent = project.icon
@@ -596,26 +528,32 @@ export default function Page() {
                         <Button
                           size="sm"
                           variant="outline"
+                          asChild // Ensure it renders as an anchor tag
                           className={`transition-all duration-300 ${
                             isDark
                               ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
                               : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
                           }`}
                         >
-                          <Github className="h-4 w-4 mr-2" />
-                          Code
+                          <a href={project.codeHref} target="_blank" rel="noopener noreferrer">
+                            <Github className="h-4 w-4 mr-2" />
+                            Code
+                          </a>
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
+                          asChild // Ensure it renders as an anchor tag
                           className={`transition-all duration-300 ${
                             isDark
                               ? "text-[#A29BB0] hover:text-[#EDE6F4] hover:bg-[#2B2735]"
                               : "text-[#9E8C89] hover:text-[#4B3F40] hover:bg-[#FFF8F8]"
                           }`}
                         >
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Demo
+                          <a href={project.demoHref} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Demo
+                          </a>
                         </Button>
                       </div>
                     </div>
@@ -903,35 +841,48 @@ export default function Page() {
                     <Button
                       variant="outline"
                       size="icon"
+                      asChild
                       className={`transition-all duration-300 hover:scale-110 ${
                         isDark
                           ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
                           : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
                       }`}
                     >
-                      <Github className="h-5 w-5" />
+                      <a href="https://github.com/AmanChoudhary1" target="_blank" rel="noopener noreferrer">
+                        <Github className="h-5 w-5" />
+                      </a>
                     </Button>
                     <Button
                       variant="outline"
                       size="icon"
+                      asChild
                       className={`transition-all duration-300 hover:scale-110 ${
                         isDark
                           ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
                           : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
                       }`}
                     >
-                      <Linkedin className="h-5 w-5" />
+                      <a
+                        href="https://www.linkedin.com/in/aman-choudhary-a7a42024a/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                      </a>
                     </Button>
                     <Button
                       variant="outline"
                       size="icon"
+                      asChild
                       className={`transition-all duration-300 hover:scale-110 ${
                         isDark
                           ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
                           : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
                       }`}
                     >
-                      <Twitter className="h-5 w-5" />
+                      <a href="https://twitter.com/AmanChoudharySec" target="_blank" rel="noopener noreferrer">
+                        <Twitter className="h-5 w-5" />
+                      </a>
                     </Button>
                   </div>
                 </div>
