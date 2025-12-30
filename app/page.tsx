@@ -22,7 +22,6 @@ import {
   Phone,
   MapPin,
   ExternalLink,
-  Home,
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -73,12 +72,6 @@ export default function Page() {
 
   const navigationItems = [
     {
-      icon: Home, // Changed icon to Home
-      title: "Home",
-      description: "Back to main page",
-      href: "home",
-    },
-    {
       icon: User,
       title: "About Me",
       description: "Learn about my background and education",
@@ -105,12 +98,7 @@ export default function Page() {
   ]
 
   const handleNavigation = (href: string) => {
-    if (href === "home") {
-      setActiveModal(null)
-    } else {
-      setActiveModal(href)
-    }
-    // No longer need to close nav as it's removed
+    setActiveModal(href)
   }
 
   const closeModal = () => {
@@ -183,72 +171,45 @@ export default function Page() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-              <Button
-                variant="outline"
-                size="lg"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
+              <button
                 onClick={() => handleNavigation("projects")}
-                className={`text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 min-w-[180px] min-h-[44px] ${
+                className={`px-8 py-3 rounded-md font-medium transition-all duration-300 active:scale-95 group relative overflow-hidden min-w-[180px] min-h-[48px] ${
                   isDark
-                    ? "border-2 border-[#B18BD8] hover:bg-[#B18BD8] hover:text-white shadow-lg shadow-[#B18BD8]/20 hover:shadow-xl hover:shadow-[#A66CFF]/50 text-[#B18BD8]"
-                    : "border-2 border-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white text-[#BC8C7A]"
+                    ? "bg-[#B18BD8] text-white hover:bg-[#A66CFF] hover:shadow-[0_0_20px_rgba(177,139,216,0.5)]"
+                    : "bg-[#BC8C7A] text-white hover:bg-[#A67B69] hover:shadow-[0_0_20px_rgba(188,140,122,0.5)]"
                 }`}
-              
+              >
                 View My Work
-              </Button>
-              <Button
+              </button>
+
+              <button
                 onClick={downloadResume}
-                variant="outline"
-                size="lg"
-                className={`text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 min-w-[180px] min-h-[44px] ${
+                className={`px-8 py-3 rounded-md font-medium transition-all duration-300 border-2 active:scale-95 min-w-[180px] min-h-[48px] ${
                   isDark
-                    ? "border-2 border-[#B18BD8] hover:bg-[#B18BD8] hover:text-white shadow-lg shadow-[#B18BD8]/20 hover:shadow-xl hover:shadow-[#A66CFF]/50 text-[#B18BD8]"
-                    : "border-2 border-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white text-[#BC8C7A]"
+                    ? "bg-transparent border-[#B18BD8] text-[#B18BD8] hover:bg-[#B18BD8]/10 hover:shadow-[0_0_15px_rgba(177,139,216,0.3)]"
+                    : "bg-transparent border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A]/10 hover:shadow-[0_0_15px_rgba(188,140,122,0.3)]"
                 }`}
               >
                 Download Resume
-              </Button>
+              </button>
             </div>
 
-            {/* Social Links */}
-            <div className="flex gap-4 justify-center lg:justify-start pt-4">
-              {[
-                { icon: Github, href: "https://github.com/AmanChoudhary1", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/aman-choudhary-a7a42024a/", label: "LinkedIn" },
-                { icon: Twitter, href: "https://twitter.com/AmanChoudharySec", label: "Twitter" },
-                { icon: Mail, href: "mailto:aman.r.choudharyy@gmail.com", label: "Email" },
-              ].map((social, index) => {
-                const IconComponent = social.icon
-                return (
-                  <a
-                    key={index}
-                    href={social.href}
-                    aria-label={social.label}
-                    className={`p-3 rounded-full transition-all duration-300 hover:scale-110 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                      isDark
-                        ? "bg-[#2B2735] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-white hover:shadow-lg hover:shadow-[#A66CFF]/30"
-                        : "bg-[#FFF8F8] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-white hover:shadow-lg hover:shadow-[#BC8C7A]/30"
-                    }`}
-                  >
-                    <IconComponent className="h-5 w-5" />
-                  </a>
-                )
-              })}
-            </div>
+            {/* Removed social links from the hero section */}
           </div>
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 pb-safe">
+      <div className="fixed bottom-0 left-0 right-0 z-40 pb-safe pointer-events-none">
         <div
-          className={`mx-auto max-w-2xl px-4 pb-4 ${
+          className={`mx-auto max-w-2xl px-4 pb-4 pt-10 pointer-events-auto ${
             isDark
               ? "bg-gradient-to-t from-[#1F1B24] via-[#1F1B24] to-transparent"
               : "bg-gradient-to-t from-[#FFF5F5] via-[#FFF5F5] to-transparent"
           }`}
         >
           <div
-            className={`flex items-center justify-around gap-2 p-3 rounded-2xl backdrop-blur-lg border-2 shadow-2xl ${
+            className={`flex items-center justify-start sm:justify-around gap-2 p-3 rounded-2xl backdrop-blur-lg border-2 shadow-2xl overflow-x-auto no-scrollbar scroll-smooth ${
               isDark
                 ? "bg-[#2B2735]/90 border-[#3D3548] shadow-[#A66CFF]/20"
                 : "bg-[#FFF8F8]/90 border-[#F0E6E6] shadow-[#BC8C7A]/20"
@@ -260,15 +221,24 @@ export default function Page() {
                 <button
                   key={index}
                   onClick={() => handleNavigation(item.href)}
-                  className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-300 hover:scale-110 min-w-[60px] group ${
+                  className={`flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 min-w-[80px] group flex-shrink-0 ${
                     isDark
                       ? "text-[#B18BD8] hover:bg-[#A66CFF]/20 hover:text-[#EDE6F4]"
                       : "text-[#BC8C7A] hover:bg-[#BC8C7A]/20 hover:text-[#4B3F40]"
                   }`}
                   aria-label={item.title}
                 >
-                  <IconComponent className="h-6 w-6" />
-                  <span className="text-xs font-medium whitespace-nowrap">{item.title}</span>
+                  <div className="relative">
+                    <IconComponent className="h-6 w-6 transition-transform duration-300 group-hover:-translate-y-1" />
+                    <div
+                      className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                        isDark ? "bg-[#A66CFF]" : "bg-[#BC8C7A]"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap opacity-80 group-hover:opacity-100 transition-opacity">
+                    {item.title}
+                  </span>
                 </button>
               )
             })}
