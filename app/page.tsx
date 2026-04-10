@@ -757,26 +757,6 @@ export default function Page() {
                           isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
                         }`}
                       >
-                        <Phone className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className={`text-lg font-semibold ${isDark ? "text-white" : "text-black"}`}>Phone</h3>
-                        <p className={`${isDark ? "text-white" : "text-black"}`}>+91 9825228983</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`p-6 rounded-xl border ${
-                      isDark ? "bg-[#2B2735] border-[#3D3548]" : "bg-[#FFF8F8] border-[#F0E6E6]"
-                    }`}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div
-                        className={`p-3 rounded-lg ${
-                          isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
-                        }`}
-                      >
                         <Mail className="h-6 w-6" />
                       </div>
                       <div>
@@ -801,7 +781,34 @@ export default function Page() {
                       </div>
                       <div>
                         <h3 className={`text-lg font-semibold ${isDark ? "text-white" : "text-black"}`}>Location</h3>
-                        <p className={`${isDark ? "text-white" : "text-black"}`}>Gandhidham, Gujarat</p>
+                        <p className={`${isDark ? "text-white" : "text-black"}`}>Ahmedabad, Gujarat</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`p-6 rounded-xl border ${
+                      isDark ? "bg-[#2B2735] border-[#3D3548]" : "bg-[#FFF8F8] border-[#F0E6E6]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div
+                        className={`p-3 rounded-lg ${
+                          isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
+                        }`}
+                      >
+                        <Linkedin className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h3 className={`text-lg font-semibold ${isDark ? "text-white" : "text-black"}`}>LinkedIn</h3>
+                        <a 
+                          href="https://linkedin.com/in/aman-choudhary" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={`${isDark ? "text-[#A66CFF] hover:text-[#B18BD8]" : "text-[#BC8C7A] hover:text-[#9E7B73]"} transition-colors duration-300`}
+                        >
+                          aman-choudhary
+                        </a>
                       </div>
                     </div>
                   </div>

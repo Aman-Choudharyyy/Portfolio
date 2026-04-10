@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { Button } from "@/components/ui/button"
-import { X, Phone, Mail, MapPin, Github, Linkedin, ExternalLink, Send } from "lucide-react"
+import { X, Mail, MapPin, Github, Linkedin, ExternalLink, Send } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export default function ContactPage() {
@@ -44,12 +44,6 @@ export default function ContactPage() {
 
   const contactInfo = [
     {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 9825228983",
-      href: "tel:+919825228983",
-    },
-    {
       icon: Mail,
       label: "Email",
       value: "aman.r.choudharyy@gmail.com",
@@ -58,8 +52,14 @@ export default function ContactPage() {
     {
       icon: MapPin,
       label: "Location",
-      value: "Gandhidham, Gujarat",
+      value: "Ahmedabad, Gujarat",
       href: "#",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "aman-choudhary",
+      href: "https://www.linkedin.com/in/aman-choudhary-53305b263/",
     },
   ]
 
@@ -153,37 +153,14 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Social Links */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
-                <div className="flex gap-4">
-                  {socialLinks.map((social, index) => {
-                    const IconComponent = social.icon
-                    return (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        size="icon"
-                        className={`transition-all duration-300 hover:scale-110 ${
-                          isDark
-                            ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
-                            : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
-                        }`}
-                        aria-label={social.label}
-                      >
-                        <IconComponent className="h-5 w-5" />
-                      </Button>
-                    )
-                  })}
-                </div>
-              </div>
+
             </div>
 
             {/* Contact Form */}
             <div className="animate-in slide-in-from-right duration-700">
               <div
                 className={`p-6 rounded-2xl transition-all duration-500 ${
-                  isDark ? "bg-[#2B2735] border border-[#3D3548]" : "bg-[#FFF8F8] border border-[#F0E6E6]"
+                  isDark ? "bg-transparent border border-[#3D3548]" : "bg-transparent border border-[#F0E6E6]"
                 }`}
               >
                 <h2 className="text-2xl font-bold mb-6">Send me a message</h2>
