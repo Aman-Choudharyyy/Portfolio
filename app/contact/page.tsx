@@ -153,30 +153,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Social Links */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
-                <div className="flex gap-4">
-                  {socialLinks.map((social, index) => {
-                    const IconComponent = social.icon
-                    return (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        size="icon"
-                        className={`transition-all duration-300 hover:scale-110 ${
-                          isDark
-                            ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
-                            : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
-                        }`}
-                        aria-label={social.label}
-                      >
-                        <IconComponent className="h-5 w-5" />
-                      </Button>
-                    )
-                  })}
-                </div>
-              </div>
+
             </div>
 
             {/* Contact Form */}
