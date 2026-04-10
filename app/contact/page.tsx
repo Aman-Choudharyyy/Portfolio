@@ -55,6 +55,12 @@ export default function ContactPage() {
       value: "Ahmedabad, Gujarat",
       href: "#",
     },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "aman-choudhary",
+      href: "https://linkedin.com/in/aman-choudhary",
+    },
   ]
 
   const socialLinks = [
@@ -123,43 +129,25 @@ export default function ContactPage() {
                   {contactInfo.map((info, index) => {
                     const IconComponent = info.icon
                     return (
-                      <div key={index}>
-                        <a
-                          href={info.href}
-                          className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] ${
-                            isDark ? "hover:bg-[#2B2735]" : "hover:bg-[#FFF8F8]"
+                      <a
+                        key={index}
+                        href={info.href}
+                        className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] ${
+                          isDark ? "hover:bg-[#2B2735]" : "hover:bg-[#FFF8F8]"
+                        }`}
+                      >
+                        <div
+                          className={`p-3 rounded-xl transition-colors duration-500 ${
+                            isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
                           }`}
                         >
-                          <div
-                            className={`p-3 rounded-xl transition-colors duration-500 ${
-                              isDark ? "bg-[#A66CFF]/20 text-[#B18BD8]" : "bg-[#BC8C7A]/20 text-[#BC8C7A]"
-                            }`}
-                          >
-                            <IconComponent className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-medium opacity-70">{info.label}</div>
-                            <div className="text-lg">{info.value}</div>
-                          </div>
-                        </a>
-                        {info.label === "Location" && (
-                          <div className="ml-16 mt-2 flex gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className={`transition-all duration-300 hover:scale-105 ${
-                                isDark
-                                  ? "border-[#B18BD8] text-[#B18BD8] hover:bg-[#A66CFF] hover:text-[#1F1B24]"
-                                  : "border-[#BC8C7A] text-[#BC8C7A] hover:bg-[#BC8C7A] hover:text-[#FFF5F5]"
-                              }`}
-                              onClick={() => window.open("https://linkedin.com/in/aman-choudhary", "_blank")}
-                            >
-                              <Linkedin className="h-4 w-4 mr-2" />
-                              LinkedIn
-                            </Button>
-                          </div>
-                        )}
-                      </div>
+                          <IconComponent className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium opacity-70">{info.label}</div>
+                          <div className="text-lg">{info.value}</div>
+                        </div>
+                      </a>
                     )
                   })}
                 </div>
