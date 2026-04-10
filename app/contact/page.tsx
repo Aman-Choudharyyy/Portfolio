@@ -59,7 +59,7 @@ export default function ContactPage() {
       icon: Linkedin,
       label: "LinkedIn",
       value: "aman-choudhary",
-      href: "https://linkedin.com/in/aman-choudhary",
+      href: "https://www.linkedin.com/in/aman-choudhary-53305b263/",
     },
   ]
 
@@ -183,7 +183,7 @@ export default function ContactPage() {
             <div className="animate-in slide-in-from-right duration-700">
               <div
                 className={`p-6 rounded-2xl transition-all duration-500 ${
-                  isDark ? "bg-[#2B2735] border border-[#3D3548]" : "bg-[#FFF8F8] border border-[#F0E6E6]"
+                  isDark ? "bg-transparent border border-[#3D3548]" : "bg-transparent border border-[#F0E6E6]"
                 }`}
               >
                 <h2 className="text-2xl font-bold mb-6">Send me a message</h2>
